@@ -1,7 +1,3 @@
 class ApiConfig {
-  final String baseUrl = "universal-tutorial.com";
-  Map<String, String> headers = {
-    "Accept": "application/json",
-  };
-
+  final String baseUrl = "www.universal-tutorial.com";
 }

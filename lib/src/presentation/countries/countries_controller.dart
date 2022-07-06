@@ -14,19 +14,19 @@ class CountriesController extends GetxController {
   late String accessToken;
   final appStateCtrl = Get.find<AppStateController>();
 
-  // final allCountries = RxList<Country>();
+  final allCountries = RxList<Country>();
   final _isLoading = false.obs;
   final _hasError = false.obs;
   final _errorMessage = "".obs;
 
-  set isLoading(bool value) => _isLoading.value = value; 
-  bool get isLoading => _isLoading.value; 
+  set isLoading(bool value) => _isLoading.value = value;
+  bool get isLoading => _isLoading.value;
 
-  set hasError(bool value) => _hasError.value = value; 
-  bool get hasError => _hasError.value; 
+  set hasError(bool value) => _hasError.value = value;
+  bool get hasError => _hasError.value;
 
-  set errorMessage(String value) => _errorMessage.value = value; 
-  String get errorMessage => _errorMessage.value; 
+  set errorMessage(String value) => _errorMessage.value = value;
+  String get errorMessage => _errorMessage.value;
 
   @override
   void onInit() {
@@ -36,18 +36,18 @@ class CountriesController extends GetxController {
 
   @override
   void onReady() async {
-    // await getCountries();
+    await getCountries();
     super.onReady();
   }
 
   getCountries() async {
     isLoading = true;
     hasError = false;
-    try {      
+    try {
       final countries = await repository.getCountries(token: accessToken);
-      // allCountries.value = countries;
+      allCountries.value = countries;
       isLoading = false;
-      hasError = false ;
+      hasError = false;
       update();
     } catch (e) {
       isLoading = false;
@@ -62,7 +62,8 @@ class CountriesController extends GetxController {
       return _openMap("https://maps.apple.com/?q=$country");
     }
     if (GetPlatform.isAndroid || GetPlatform.isWeb) {
-      return _openMap("https://www.google.com/maps/search/?api=1&query=$country");
+      return _openMap(
+          "https://www.google.com/maps/search/?api=1&query=$country");
     }
   }
 

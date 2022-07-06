@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:prueba/src/presentation/countries/countries_binding.dart';
 import 'package:prueba/src/presentation/countries/countries_page.dart';

@@ -21,7 +21,7 @@ class ApiRepository {
   }
 
   Future<List<Country>> getCountries({required String token}) async {
-    final response = await api.get(endPoint: "api/countries/", token: token);
+    final response = await api.get(endPoint: "api/countries", token: token);
 
     if (response.statusCode == 200) {
       final decodedData =
@@ -29,6 +29,8 @@ class ApiRepository {
       return decodedData.map((c) => Country.fromJson(c)).toList();
     }
 
-    throw Exception("Error al obtener paises, Code: ${response.statusCode}");
+    final decodedData = json.decode(response.body) as Map<String, dynamic>;
+
+    throw Exception("Status: ${response.statusCode} ${decodedData["error"]}");
   }
 }

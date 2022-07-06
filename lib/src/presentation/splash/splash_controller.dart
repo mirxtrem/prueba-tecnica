@@ -23,8 +23,6 @@ class SplashController extends GetxController {
     isLoading.value = true;
     try {
       final accessToken = await repository.getToken();
-      final countries = await repository.getCountries(token: accessToken);
-      appStateCtrl.allCountries.value = countries;
       appStateCtrl.accessToken = accessToken;
       isLoading.value = false;
       Get.toNamed(Routes.home);
@@ -41,5 +39,4 @@ class SplashController extends GetxController {
       ));
     }
   }
-
 }

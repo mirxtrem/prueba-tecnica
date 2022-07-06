@@ -54,9 +54,9 @@ class CountriesPage extends GetWidget<CountriesController> {
                   }
                   return Flexible(
                     child: ListView.separated(
-                      itemCount: controller.appStateCtrl.allCountries.length,
+                      itemCount: controller.allCountries.length,
                       itemBuilder: (context, i) {
-                        Country country = controller.appStateCtrl.allCountries[i];
+                        Country country = controller.allCountries[i];
                         return CardCountry(
                             countryName: country.name,
                             shortName: country.shortName,
