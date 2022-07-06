@@ -12,8 +12,8 @@ class ApiService extends ApiConfig {
   }) async {
     final headers = {
       "Accept": "application/json",
-      "user-email": dotenv.env["USER_EMAIL"] ?? "",
-      "api-token": dotenv.env["API_TOKEN"] ?? "",
+      "user-email": dotenv.env["USER_EMAIL"]!,
+      "api-token": dotenv.env["API_TOKEN"]!,
     };
 
     final Uri url = Uri.https(baseUrl, endPoint);

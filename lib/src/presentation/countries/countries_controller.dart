@@ -15,6 +15,7 @@ class CountriesController extends GetxController {
   final appStateCtrl = Get.find<AppStateController>();
 
   final allCountries = RxList<Country>();
+  final filteredCountries = RxList<Country>();
   final _isLoading = false.obs;
   final _hasError = false.obs;
   final _errorMessage = "".obs;
@@ -40,12 +41,13 @@ class CountriesController extends GetxController {
     super.onReady();
   }
 
-  getCountries() async {
+  Future<void> getCountries() async {
     isLoading = true;
     hasError = false;
     try {
       final countries = await repository.getCountries(token: accessToken);
       allCountries.value = countries;
+      filteredCountries.value = countries;
       isLoading = false;
       hasError = false;
       update();
@@ -57,21 +59,22 @@ class CountriesController extends GetxController {
     }
   }
 
-  openMaps(String country) async {
-    if (GetPlatform.isIOS) {
-      return _openMap("https://maps.apple.com/?q=$country");
-    }
-    if (GetPlatform.isAndroid || GetPlatform.isWeb) {
-      return _openMap(
-          "https://www.google.com/maps/search/?api=1&query=$country");
+  void search(String? query) {
+    if (query != null) {
+      final q = query.toLowerCase();
+      filteredCountries.value =
+          allCountries.where((c) => c.name.toLowerCase().contains(q)).toList();
+      update();
     }
   }
 
-  _openMap(String url) async {
-    if (await canLaunchUrlString(url)) {
-      return launchUrlString(url);
-    } else {
-      throw "No se puede abrir el mapa";
+  openMaps(String country) async {
+    if (GetPlatform.isIOS) {
+      return launchUrlString("https://maps.apple.com/?q=$country");
+    }
+    if (GetPlatform.isAndroid || GetPlatform.isWeb) {
+      return launchUrlString(
+          "https://www.google.com/maps/search/?api=1&query=$country");
     }
   }
 }

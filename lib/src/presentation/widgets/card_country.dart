@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class CardCountry extends StatelessWidget {
-
   const CardCountry({
     Key? key,
     required this.countryName,
@@ -36,23 +35,25 @@ class CardCountry extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 12.0),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    countryName,
-                    style: theme.textTheme.titleLarge
-                        ?.copyWith(fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    "Short name: $shortName",
-                    style: theme.textTheme.bodyLarge,
-                  ),
-                  Text(
-                    "Phone code: +$phoneCode",
-                    style: theme.textTheme.subtitle1,
-                  ),
-                ],
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      countryName,
+                      style: theme.textTheme.titleLarge
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "Short name: $shortName",
+                      style: theme.textTheme.bodyLarge,
+                    ),
+                    Text(
+                      "Phone code: +$phoneCode",
+                      style: theme.textTheme.subtitle1,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

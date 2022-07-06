@@ -22,7 +22,10 @@ class CountriesPage extends GetWidget<CountriesController> {
             children: [
               TextFormField(
                 decoration: const InputDecoration(
-                    hintText: "Buscar País", suffixIcon: Icon(Icons.search)),
+                  hintText: "Buscar País",
+                  suffixIcon: Icon(Icons.search),
+                ),
+                onChanged: controller.search,
               ),
               const Divider(),
               const SizedBox(height: 8),
@@ -54,9 +57,9 @@ class CountriesPage extends GetWidget<CountriesController> {
                   }
                   return Flexible(
                     child: ListView.separated(
-                      itemCount: controller.allCountries.length,
+                      itemCount: controller.filteredCountries.length,
                       itemBuilder: (context, i) {
-                        Country country = controller.allCountries[i];
+                        Country country = controller.filteredCountries[i];
                         return CardCountry(
                             countryName: country.name,
                             shortName: country.shortName,

@@ -24,8 +24,7 @@ class ApiRepository {
     final response = await api.get(endPoint: "api/countries", token: token);
 
     if (response.statusCode == 200) {
-      final decodedData =
-          json.decode(response.body) as List<Map<String, dynamic>>;
+      final decodedData = json.decode(response.body) as List<dynamic>;
       return decodedData.map((c) => Country.fromJson(c)).toList();
     }
 
